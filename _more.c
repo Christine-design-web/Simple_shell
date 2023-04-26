@@ -1,20 +1,20 @@
-#include "shell.h"
+#include "hell.h"
 
 /**
- * builtin_exit - exit of the program with the status
+ * builtin_exit - this will  exit the program with the status
  * @data: struct for the program's data
  * Return: zero if sucess, or other number if its declared in the arguments
  */
 int builtin_exit(data_of_program *data)
 {
-	int i;
+	int c;
 
 	if (data->tokens[1] != NULL)
-	{/*if exists arg for exit, check if is a number*/
-		for (i = 0; data->tokens[1][i]; i++)
-			if ((data->tokens[1][i] < '0' || data->tokens[1][i] > '9')
-				&& data->tokens[1][i] != '+')
-			{/*if is not a number*/
+	{
+		for (c = 0; data->tokens[1][c]; c++)
+			if ((data->tokens[1][c] < '0' || data->tokens[1][c] > '9')
+				&& data->tokens[1][c] != '+')
+			{
 				errno = 2;
 				return (2);
 			}
@@ -25,7 +25,7 @@ int builtin_exit(data_of_program *data)
 }
 
 /**
- * builtin_cd - change the current directory
+ * builtin_cd - this will change the current directory
  * @data: struct for the program's data
  * Return: zero if sucess, or other number if its declared in the arguments
  */
@@ -63,7 +63,7 @@ int builtin_cd(data_of_program *data)
 }
 
 /**
- * set_work_directory - set the work directory
+ * set_work_directory - will set the work directory
  * @data: struct for the program's data
  * @new_dir: path to be set as work directory
  * Return: zero if sucess, or other number if its declared in the arguments
@@ -96,7 +96,7 @@ int set_work_directory(data_of_program *data, char *new_dir)
  */
 int builtin_help(data_of_program *data)
 {
-	int i, length = 0;
+	int c, length = 0;
 	char *mensajes[6] = {NULL};
 
 	mensajes[0] = HELP_MSG;
@@ -119,41 +119,38 @@ int builtin_help(data_of_program *data)
 	mensajes[4] = HELP_UNSETENV_MSG;
 	mensajes[5] = HELP_CD_MSG;
 
-	for (i = 0; mensajes[i]; i++)
+	for (c = 0; mensajes[c]; c++)
 	{
-		/*print the length of string */
 		length = str_length(data->tokens[1]);
-		if (str_compare(data->tokens[1], mensajes[i], length))
+		if (str_compare(data->tokens[1], mensajes[c], length))
 		{
-			_print(mensajes[i] + length + 1);
+			_print(mensajes[c] + length + 1);
 			return (1);
 		}
 	}
-	/*if there is no match, print error and return -1 */
 	errno = EINVAL;
 	perror(data->command_name);
 	return (0);
 }
 
 /**
- * builtin_alias - add, remove or show aliases
+ * builtin_alias -  will continue add, remove or show aliases
  * @data: struct for the program's data
  * Return: zero if sucess, or other number if its declared in the arguments
  */
 int builtin_alias(data_of_program *data)
 {
-	int i = 0;
+	int c = 0;
 
-	/* if there are no arguments, print all environment */
 	if (data->tokens[1] == NULL)
 		return (print_alias(data, NULL));
 
-	while (data->tokens[++i])
-	{/* if there are arguments, set or print each env variable*/
-		if (count_characters(data->tokens[i], "="))
-			set_alias(data->tokens[i], data);
+	while (data->tokens[++c])
+	{
+		if (count_characters(data->tokens[c], "="))
+			set_alias(data->tokens[c], data);
 		else
-			print_alias(data, data->tokens[i]);
+			print_alias(data, data->tokens[c]);
 	}
 
 	return (0);
