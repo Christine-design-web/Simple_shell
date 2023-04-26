@@ -15,20 +15,20 @@
 
 /************* MACROS **************/
 
-#include "macros.h" /* for msg help and prompt */
+#include "macro.h"
 
 /************* STRUCTURES **************/
 
 /**
- * struct info- struct for the program's data
- * @program_name: the name of the executable
+ * struct info- struct for the data
+ * @program_name: the executable
  * @input_line: pointer to the input read for _getline
- * @command_name: pointer to the first command typed by the user
- * @exec_counter: number of excecuted comands
- * @file_descriptor: file descriptor to the input of commands
- * @tokens: pointer to array of tokenized input
- * @env: copy of the environ
- * @alias_list: array of pointers with aliases.
+ * @command_name: pointer to the first command entered
+ * @exec_counter: no of excecuted comands
+ * @file_descriptor: file descriptor to the input
+ * @tokens: pointer to array
+ * @env: copy of the env
+ * @alias_list: array of aliased pointers
  */
 typedef struct info
 {
@@ -43,9 +43,9 @@ typedef struct info
 } data_of_program;
 
 /**
- * struct builtins - struct for the builtins
- * @builtin: the name of the builtin
- * @function: the associated function to be called for each builtin
+ * struct builtins - struct for the builtins functions
+ * @builtin: the name builtin functions
+ * @function: the called fcnt
  */
 typedef struct builtins
 {
@@ -53,25 +53,21 @@ typedef struct builtins
 	int (*function)(data_of_program *data);
 } builtins;
 
-
-/************* MAIN FUNCTIONS *************/
-
-
 /*========  shell.c  ========*/
 
-/* Inicialize the struct with the info of the program */
+/* Initialize struct with the program info*/
 void inicialize_data(data_of_program *data, int arc, char *argv[], char **env);
 
-/* Makes the infinite loop that shows the prompt*/
+/* prompt in an infinite loop*/
 void sisifo(char *prompt, data_of_program *data);
 
-/* Print the prompt in a new line */
+/* Output prompt*/
 void handle_ctrl_c(int opr UNUSED);
 
 
 /*========  _getline.c  ========*/
 
-/* Read one line of the standar input*/
+/* one line of the standar input*/
 int _getline(data_of_program *data);
 
 /* split the each line for the logical operators if it exist */

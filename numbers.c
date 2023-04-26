@@ -1,12 +1,12 @@
-#include "shell.h"
+#include "hell.h"
 
 /**
- * long_to_string - converts a number to a string.
- * @number: number to be converten in an string.
+ * long_to_string - converts a num to a str
+ * @number: num to  string.
  * @string: buffer to save the number as string.
- * @base: base to convert number
+ * @base: base converter
  *
- * Return: Nothing.
+ * Return: None.
  */
 void long_to_string(long number, char *string, int base)
 {
@@ -37,16 +37,16 @@ void long_to_string(long number, char *string, int base)
 
 
 /**
- * _atoi - convert a string to an integer.
+ * _atoi - str to an int
  *
- * @s: pointer to str origen.
+ * @s: ptr to str
  * Return: int of string or 0.
  */
 int _atoi(char *s)
 {
 	int sign = 1;
 	unsigned int number = 0;
-	/*1- analisys sign*/
+	/*1- the sign*/
 	while (!('0' <= *s && *s <= '9') && *s != '\0')
 	{
 		if (*s == '-')
@@ -56,7 +56,7 @@ int _atoi(char *s)
 		s++;
 	}
 
-	/*2 - extract the number */
+	/*2 - extract  number */
 	while ('0' <= *s && *s <= '9' && *s != '\0')
 	{
 
@@ -75,11 +75,11 @@ int _atoi(char *s)
  */
 int count_characters(char *string, char *character)
 {
-	int i = 0, counter = 0;
+	int c = 0, counter = 0;
 
-	for (; string[i]; i++)
+	for (; string[c]; c++)
 	{
-		if (string[i] == character[0])
+		if (string[c] == character[0])
 			counter++;
 	}
 	return (counter);

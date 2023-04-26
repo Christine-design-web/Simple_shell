@@ -1,10 +1,10 @@
-#include "shell.h"
+#include "hell.h"
 /**
- * main - initialize the variables of the program
- * @argc: number of values received from the command line
- * @argv: values received from the command line
- * @env: number of values received from the command line
- * Return: zero on succes.
+ * main - declare var
+ * @argc: num of values from cmd
+ * @argv: values from the cmd
+ * @env: num of values from the cmd
+ * Return: 0 on succes.
  */
 int main(int argc, char *argv[], char *env[])
 {
@@ -16,7 +16,7 @@ int main(int argc, char *argv[], char *env[])
 	signal(SIGINT, handle_ctrl_c);
 
 	if (isatty(STDIN_FILENO) && isatty(STDOUT_FILENO) && argc == 1)
-	{/* We are in the terminal, interactive mode */
+	{/* terminal, interactive mode */
 		errno = 2;/*???????*/
 		prompt = PROMPT_MSG;
 	}
@@ -26,9 +26,9 @@ int main(int argc, char *argv[], char *env[])
 }
 
 /**
- * handle_ctrl_c - print the prompt in a new line
+ * handle_ctrl_c - output  the comand
  * when the signal SIGINT (ctrl + c) is send to the program
- * @UNUSED: option of the prototype
+ * @UNUSED: proto choice
  */
 void handle_ctrl_c(int opr UNUSED)
 {
@@ -37,15 +37,15 @@ void handle_ctrl_c(int opr UNUSED)
 }
 
 /**
- * inicialize_data - inicialize the struct with the info of the program
- * @data: pointer to the structure of data
- * @argv: array of arguments pased to the program execution
- * @env: environ pased to the program execution
- * @argc: number of values received from the command line
+ * inicialize_data - initialize struct
+ * @data: structure ptr
+ * @argv: array of argrs
+ * @env: env exc
+ * @argc: num of values from  cmd
  */
 void inicialize_data(data_of_program *data, int argc, char *argv[], char **env)
 {
-	int i = 0;
+	int c = 0;
 
 	data->program_name = argv[0];
 	data->input_line = NULL;
@@ -70,24 +70,24 @@ void inicialize_data(data_of_program *data, int argc, char *argv[], char **env)
 	data->env = malloc(sizeof(char *) * 50);
 	if (env)
 	{
-		for (; env[i]; i++)
+		for (; env[c]; c++)
 		{
-			data->env[i] = str_duplicate(env[i]);
+			data->env[c] = str_duplicate(env[c]);
 		}
 	}
-	data->env[i] = NULL;
+	data->env[c] = NULL;
 	env = data->env;
 
 	data->alias_list = malloc(sizeof(char *) * 20);
-	for (i = 0; i < 20; i++)
+	for (c = 0; c < 20; c++)
 	{
-		data->alias_list[i] = NULL;
+		data->alias_list[c] = NULL;
 	}
 }
 /**
- * sisifo - its a infinite loop that shows the prompt
- * @prompt: prompt to be printed
- * @data: its a infinite loop that shows the prompt
+ * sisifo - infinite output loop
+ * @prompt: output
+ * @data: infinite loop
  */
 void sisifo(char *prompt, data_of_program *data)
 {
@@ -101,7 +101,7 @@ void sisifo(char *prompt, data_of_program *data)
 		if (error_code == EOF)
 		{
 			free_all_data(data);
-			exit(errno); /* if EOF is the fisrt Char of string, exit*/
+			exit(errno);
 		}
 		if (string_len >= 1)
 		{
@@ -109,7 +109,7 @@ void sisifo(char *prompt, data_of_program *data)
 			expand_variables(data);
 			tokenize(data);
 			if (data->tokens[0])
-			{ /* if a text is given to prompt, execute */
+			{ /* text is given to prompt, execute */
 				error_code = execute(data);
 				if (error_code != 0)
 					_print_error(error_code, data);

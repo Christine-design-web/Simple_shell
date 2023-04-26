@@ -1,9 +1,9 @@
-#include "shell.h"
+#include "hell.h"
 
 /**
- * str_length - returns the length of a string.
- * @string: pointer to string.
- * Return: length of string.
+ * str_length - Outputs length of a str.
+ * @string: ptr to str.
+ * Return: ln of str.
  */
 int str_length(char *string)
 {
@@ -19,14 +19,14 @@ int str_length(char *string)
 }
 
 /**
- * str_duplicate - duplicates an string
- * @string: String to be copied
- * Return: pointer to the array
+ * str_duplicate - duplicates an str
+ * @string: str copy
+ * Return: arr ptr
  */
 char *str_duplicate(char *string)
 {
 	char *result;
-	int length, i;
+	int length, c;
 
 	if (string == NULL)
 		return (NULL);
@@ -41,20 +41,20 @@ char *str_duplicate(char *string)
 		perror("Error");
 		return (NULL);
 	}
-	for (i = 0; i < length ; i++)
+	for (c = 0; c < length ; c++)
 	{
-		result[i] = string[i];
+		result[c] = string[c];
 	}
 
 	return (result);
 }
 
 /**
- * str_compare - Compare two strings
- * @string1: String one, or the shorter
- * @string2: String two, or the longer
- * @number: number of characters to be compared, 0 if infinite
- * Return: 1 if the strings are equals,0 if the strings are different
+ * str_compare - Compare string1 and string2
+ * @string1: First string, shorter
+ * @string2: Second str, longer
+ * @number: num of char
+ * Return: 1strings equals,0 difference in strings
  */
 int str_compare(char *string1, char *string2, int number)
 {
@@ -89,11 +89,11 @@ int str_compare(char *string1, char *string2, int number)
 }
 
 /**
- * str_concat - concatenates two strings.
- * @string1: String to be concatenated
- * @string2: String to be concatenated
+ * str_concat - concats two strs.
+ * @string1: str to concat
+ * @string2: str to concat
  *
- * Return: pointer to the array
+ * Return: ptr to the array
  */
 char *str_concat(char *string1, char *string2)
 {
@@ -134,21 +134,21 @@ char *str_concat(char *string1, char *string2)
 
 
 /**
- * str_reverse - reverses a string.
+ * str_reverse - reverse a str.
  *
- * @string: pointer to string.
+ * @string: ptr to str.
  * Return: void.
  */
 void str_reverse(char *string)
 {
 
-	int i = 0, length = str_length(string) - 1;
+	int c = 0, length = str_length(string) - 1;
 	char hold;
 
-	while (i < length)
+	while (c < length)
 	{
-		hold = string[i];
-		string[i++] = string[length];
+		hold = string[c];
+		string[c++] = string[length];
 		string[length--] = hold;
 	}
 }
