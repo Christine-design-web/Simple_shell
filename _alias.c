@@ -92,7 +92,7 @@ int set_alias(char *alias_string, data_of_program *data)
 
 	for (s = 0; data->alias_list[s]; s++)
 		if (str_compare(buffer, data->alias_list[s], c) &&
-			data->alias_list[s]c == '=')
+			data->alias_list[s][c] == '=')
 		{
 			free(data->alias_list[s]);
 			break;
